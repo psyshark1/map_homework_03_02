@@ -26,9 +26,8 @@ void parallel_for_each(const it* begin, const it* end, func& f)
 	auto mid = begin;
 	std::advance(mid, cur_sz / 2);
 	auto fut_res = std::async(parallel_for_each<it, func>, begin, mid, std::ref(f));
-	fut_res.get();
 	parallel_for_each(mid, end, f);
-	
+	fut_res.get();
  }
 
 int main()
